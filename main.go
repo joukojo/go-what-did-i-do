@@ -1,21 +1,12 @@
+// Package main provides the entry point for the 'What did I do?' application.
 package main
 
 import (
-	"fmt"
+	"github.com/joukojo/go-what-did-i-do/cmd"
 )
-
-var (
-	GitCommit string
-	GitBranch string
-	BuildTime string
-)
-
-func PrintVersion() {
-	fmt.Printf("Commit: %s\nBranch: %s\nBuild Time: %s\n", GitCommit, GitBranch, BuildTime)
-}
 
 func main() {
-	fmt.Println("What did I do?")
-	PrintVersion()
+
+	cmd.Execute()
 
 }
