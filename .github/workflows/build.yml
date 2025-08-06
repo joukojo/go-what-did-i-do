@@ -1,7 +1,7 @@
 name: Build Application
 
 env:
-  GOLANG_OPTIONS: -v -ldflags "-X main.GitCommit=$(git rev-parse HEAD) -X main.GitBranch=$(git rev-parse --abbrev-ref HEAD) -X main.BuildTime=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+  GOLANG_OPTIONS: -v -ldflags -X main.GitCommit=$(git rev-parse HEAD) -X main.GitBranch=$(git rev-parse --abbrev-ref HEAD) -X main.BuildTime=$(date -u +%Y-%m-%dT%H:%M:%SZ)
 on:
   push:
     branches:
