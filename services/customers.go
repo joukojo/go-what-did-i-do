@@ -1,4 +1,4 @@
-package service
+package services
 
 import (
 	"encoding/json"
@@ -67,7 +67,7 @@ func (c *Customers) Print() {
 
 func (c *Customers) Save() error {
 
-	err := fileutil.WriteFile(customerFileName, CustomerStorage)
+	err := fileutil.WriteDataFile(customerFileName, CustomerStorage)
 	if err != nil {
 		return err
 	}

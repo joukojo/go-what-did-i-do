@@ -53,11 +53,12 @@ func GetDataFile(datafilename string) ([]byte, error) {
 	return ReadFile(dataFilePath)
 }
 
-func WriteDataFile(datafilename string, content []byte) error {
+func WriteDataFile(datafilename string, content any) error {
 	homeDir, err := getUserHomeDir()
 	if err != nil {
 		return err
 	}
 	dataFilePath := fmt.Sprintf("%s/%s/%s", homeDir, ".what-did-i-do", datafilename)
+	fmt.Println("Writing data file to:", dataFilePath)
 	return WriteFile(dataFilePath, content)
 }
