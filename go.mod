@@ -2,11 +2,8 @@ module github.com/joukojo/go-what-did-i-do
 
 go 1.24.5
 
-tool github.com/golangci/golangci-lint
-
 require (
 	github.com/fatih/color v1.18.0 // indirect
-	github.com/golangci/golangci-lint v1.64.8 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
