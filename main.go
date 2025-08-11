@@ -3,12 +3,19 @@ package main
 
 import (
 	"github.com/joukojo/go-what-did-i-do/cmd"
+	"github.com/joukojo/go-what-did-i-do/fileutil"
 	"github.com/joukojo/go-what-did-i-do/services"
 )
 
 func initialize() {
 
+	err := fileutil.GetDataDirectory()
+	if err != nil {
+		panic(err)
+	}
+
 	services.CustomerStorage.Load()
+
 }
 
 func main() {

@@ -49,6 +49,15 @@ func getUserHomeDir() (string, error) {
 	return homeDir, nil
 }
 
+func GetDataDirectory() error {
+	homeDir, err := getUserHomeDir()
+	if err != nil {
+		return err
+	}
+	dataDir := fmt.Sprintf("%s/%s", homeDir, ".what-did-i-do")
+	return EnsureDir(dataDir)
+}
+
 // GetDataFile retrieves data from a JSON file in the user's home directory under .what-did-i-do.
 func GetDataFile(datafilename string) ([]byte, error) {
 	homeDir, err := getUserHomeDir()
@@ -68,4 +77,22 @@ func WriteDataFile(datafilename string, content any) error {
 	dataFilePath := fmt.Sprintf("%s/%s/%s", homeDir, ".what-did-i-do", datafilename)
 	fmt.Println("Writing data file to:", dataFilePath)
 	return WriteFile(dataFilePath, content)
+}
+
+func EnsureDir(path string) error {
+	// Check if the directory exists
+	_, err := os.Stat(path)
+	if os.IsNotExist(err) {
+		// Directory does not exist, so create it
+		err = os.MkdirAll(path, 0750) // create with read/write/execute permissions for owner, and read/execute for group
+		if err != nil {
+			return fmt.Errorf("failed to create directory: %w", err)
+		}
+		fmt.Println("Directory created:", path)
+	} else if err != nil {
+		return fmt.Errorf("failed to check directory: %w", err)
+	} else {
+		fmt.Println("Directory already exists:", path)
+	}
+	return nil
 }
