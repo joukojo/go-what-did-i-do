@@ -1,3 +1,4 @@
+// Package fileutil provides utility functions for working with files.
 package fileutil
 
 import (
@@ -6,6 +7,7 @@ import (
 	"os"
 )
 
+// WriteFile writes data to a file.
 func WriteFile(filename string, content any) error {
 	data, err := json.MarshalIndent(content, "", "  ") // pretty format
 	if err != nil {
@@ -22,6 +24,7 @@ func WriteFile(filename string, content any) error {
 	return nil
 }
 
+// ReadFile reads the contents of a file and returns it as a byte slice.
 func ReadFile(filename string) ([]byte, error) {
 
 	data, err := os.ReadFile(filename)
@@ -33,6 +36,7 @@ func ReadFile(filename string) ([]byte, error) {
 
 }
 
+// getUserHomeDir retrieves the user's home directory.
 func getUserHomeDir() (string, error) {
 	if os.Getenv("WDID_DEBUG") != "" {
 		return "/tmp", nil
@@ -44,6 +48,7 @@ func getUserHomeDir() (string, error) {
 	return homeDir, nil
 }
 
+// GetDataFile retrieves data from a JSON file in the user's home directory under .what-did-i-do.
 func GetDataFile(datafilename string) ([]byte, error) {
 	homeDir, err := getUserHomeDir()
 	if err != nil {
@@ -53,6 +58,7 @@ func GetDataFile(datafilename string) ([]byte, error) {
 	return ReadFile(dataFilePath)
 }
 
+// WriteDataFile writes data to a JSON file in the user's home directory under .what-did-i-do.
 func WriteDataFile(datafilename string, content any) error {
 	homeDir, err := getUserHomeDir()
 	if err != nil {
