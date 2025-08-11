@@ -49,6 +49,7 @@ func getUserHomeDir() (string, error) {
 	return homeDir, nil
 }
 
+// GetDataDirectory retrieves the data directory for the application.
 func GetDataDirectory() error {
 	homeDir, err := getUserHomeDir()
 	if err != nil {
@@ -79,6 +80,7 @@ func WriteDataFile(datafilename string, content any) error {
 	return WriteFile(dataFilePath, content)
 }
 
+// EnsureDir checks if a directory exists and creates it if it does not.
 func EnsureDir(path string) error {
 	// Check if the directory exists
 	_, err := os.Stat(path)
