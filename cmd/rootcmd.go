@@ -8,15 +8,16 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var version bool = false
+var version = false
 
 // These variables can be set at build time using -ldflags
 var (
-	GitCommit string = "none"
-	GitBranch string = "local"
-	BuildTime string = "unknown"
+	GitCommit = "none"
+	GitBranch = "local"
+	BuildTime = "unknown"
 )
 
+// PrintVersion prints the version information of the application.
 func PrintVersion() {
 	fmt.Println("What did I do?")
 
@@ -27,7 +28,7 @@ func PrintVersion() {
 var rootCmd = &cobra.Command{
 	Use:   "what-did-i-do",
 	Short: "A simple cli tool for time tracking ",
-	Run: func(cmd *cobra.Command, args []string) {
+	Run: func(_ *cobra.Command, _ []string) {
 		if version {
 			PrintVersion()
 			return
@@ -35,6 +36,7 @@ var rootCmd = &cobra.Command{
 	},
 }
 
+// Execute adds all child commands to the root command and sets flags appropriately.
 func Execute() {
 	err := rootCmd.Execute()
 	if err != nil {
