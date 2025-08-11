@@ -29,4 +29,15 @@ jobs:
         run: |
           mkdir dist
           go mod tidy
-          go build -v -ldflags "-X main.GitCommit=$(git rev-parse HEAD) -X main.GitBranch=$(git rev-parse --abbrev-ref HEAD) -X main.BuildTime=$(date -u +%Y-%m-%dT%H:%M:%SZ)" -o dist/what-did-i-do ./...
+          go build -v -ldflags "-X github.com/joukojo/go-what-did-i-do/cmd.GitCommit=$(git rev-parse HEAD) -X github.com/joukojo/go-what-did-i-do/cmd.GitBranch=$(git rev-parse --abbrev-ref HEAD) -X github.com/joukojo/go-what-did-i-do/cmd.BuildTime=$(date -u +%Y-%m-%dT%H:%M:%SZ)" -o dist/what-did-i-do
+
+      - name: Run golangci-lint
+        uses: golangci/golangci-lint-action@v8
+        with:
+          version: latest
+
+      - name: Test application customer functionalities
+        run: |
+          ./dist/what-did-i-do --version
+          ./dist/what-did-i-do customers add --name "John Doe"
+          ./dist/what-did-i-do customers list

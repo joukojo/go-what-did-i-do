@@ -1,21 +1,26 @@
+// Package main provides the entry point for the 'What did I do?' application.
 package main
 
 import (
-	"fmt"
+	"github.com/joukojo/go-what-did-i-do/cmd"
+	"github.com/joukojo/go-what-did-i-do/fileutil"
+	"github.com/joukojo/go-what-did-i-do/services"
 )
 
-var (
-	GitCommit string
-	GitBranch string
-	BuildTime string
-)
+func initialize() {
 
-func PrintVersion() {
-	fmt.Printf("Commit: %s\nBranch: %s\nBuild Time: %s\n", GitCommit, GitBranch, BuildTime)
+	err := fileutil.GetDataDirectory()
+	if err != nil {
+		panic(err)
+	}
+
+	services.CustomerStorage.Load()
+
 }
 
 func main() {
-	fmt.Println("What did I do?")
-	PrintVersion()
+
+	initialize()
+	cmd.Execute()
 
 }

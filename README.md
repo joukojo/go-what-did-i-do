@@ -1,2 +1,62 @@
 # go-what-did-i-do
 Simple command line tool for handling project tasks
+
+
+# Data storage
+
+The data is stored under user's home directory 
+
+```bash
+$HOME/.what-did-i-do  
+```
+
+| File    | Description |
+| -------- | ------- |
+| customers.json  |  customer-data in json-format    |
+
+# Usage 
+
+Help page is available for every command by: 
+
+```bash 
+what-did-i-do --help 
+```
+
+
+## Customers 
+
+The customers command group allows you to manage your customer list. A customer can have multiple projects associated with them.
+🔧 Usage
+
+what-did-i-do customers [command] [flags]
+
+### Available Commands
+
+| Command    | Description |
+| -------- | ------- |
+| add  | Adds a new customer to the system    |
+| delete | Deletes an existing customer by ID     |
+
+### Flags
+
+    -h, --help Show help for the customers command
+
+### Examples 
+
+#### Add a Customer
+
+```bash
+what-did-i-do customers add --name "Acme Corporation"
+```
+
+#### Delete a Customer
+
+```bash
+what-did-i-do customers delete --id 123445 
+```
+
+#### List Customers 
+
+```bash
+what-did-i-do customers 
+```
