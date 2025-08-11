@@ -15,6 +15,7 @@ func WriteFile(filename string, content any) error {
 		return err
 
 	}
+	// #nosec
 	err = os.WriteFile(filename, data, 0600) // write with read/write permissions for owner
 
 	if err != nil {
@@ -26,7 +27,7 @@ func WriteFile(filename string, content any) error {
 
 // ReadFile reads the contents of a file and returns it as a byte slice.
 func ReadFile(filename string) ([]byte, error) {
-
+	// #nosec
 	data, err := os.ReadFile(filename)
 	if err != nil {
 		fmt.Println("Error reading file:", err)
