@@ -15,7 +15,7 @@ func WriteFile(filename string, content any) error {
 		return err
 
 	}
-	err = os.WriteFile(filename, data, 0644)
+	err = os.WriteFile(filename, data, 0600) // write with read/write permissions for owner
 
 	if err != nil {
 		fmt.Println("Error writing file:", err)

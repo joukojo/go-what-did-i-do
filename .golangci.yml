@@ -10,3 +10,8 @@ linters:
     - staticcheck
     - unused
     - revive
+    - gosec
+  settings:
+    gosec:
+      severity: medium
+      confidence: high
