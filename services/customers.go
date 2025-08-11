@@ -1,3 +1,4 @@
+// Package services provides functionality for managing customers.
 package services
 
 import (
@@ -10,23 +11,26 @@ import (
 	"github.com/olekukonko/tablewriter"
 )
 
+// Customer structure for json serialization and deserialization.
 type Customer struct {
 	ID   int64  `json:"id"`
 	Name string `json:"name"`
 }
+
+// Customers array for JSON serialization and deserialization.
 type Customers []Customer
 
+// CustomerStorage in memory
 var CustomerStorage Customers
 
 const customerFileName = "customers.json"
 
+// Add customer
 func (c *Customers) Add(customer Customer) {
 	*c = append(*c, customer)
 }
 
-/**
- * Get returns a customer by ID.
- */
+// Get returns a customer by ID.
 func (c *Customers) Get(id int64) *Customer {
 	for _, customer := range *c {
 		if customer.ID == id {
@@ -35,6 +39,8 @@ func (c *Customers) Get(id int64) *Customer {
 	}
 	return nil
 }
+
+// Update customer name by id
 func (c *Customers) Update(id int64, name string) bool {
 	for i, customer := range *c {
 		if customer.ID == id {
@@ -44,6 +50,8 @@ func (c *Customers) Update(id int64, name string) bool {
 	}
 	return false
 }
+
+// Delete customer by id
 func (c *Customers) Delete(id int64) bool {
 	for i, customer := range *c {
 		if customer.ID == id {
@@ -54,17 +62,27 @@ func (c *Customers) Delete(id int64) bool {
 	return false
 }
 
+// Print prints the customers in a table format.
 func (c *Customers) Print() {
 	table := tablewriter.NewWriter(os.Stdout)
 	table.Header([]string{"ID", "Name"})
 	// table.SetAutoFormatHeaders(true)
 	for _, customer := range *c {
 
-		table.Append([]string{fmt.Sprintf("%d", customer.ID), customer.Name})
+		err := table.Append([]string{fmt.Sprintf("%d", customer.ID), customer.Name})
+		if err != nil {
+			fmt.Println("Error appending to table:", err)
+			return
+		}
 	}
-	table.Render() // Print the table to stdout}
+	err := table.Render() // Print the table to stdout
+	if err != nil {
+		fmt.Println("Error rendering table:", err)
+	}
+
 }
 
+// Save customer data to JSON file.
 func (c *Customers) Save() error {
 
 	err := fileutil.WriteDataFile(customerFileName, CustomerStorage)
@@ -73,6 +91,8 @@ func (c *Customers) Save() error {
 	}
 	return nil
 }
+
+// Load customers from a JSON file
 func (c *Customers) Load() {
 	content, err := fileutil.GetDataFile(customerFileName)
 
@@ -83,6 +103,10 @@ func (c *Customers) Load() {
 
 	customers := Customers{}
 	err = json.Unmarshal(content, &customers)
+	if err != nil {
+		fmt.Println("Error unmarshalling customers:", err)
+		return
+	}
 
 	for _, customer := range customers {
 		CustomerStorage.Add(customer)
