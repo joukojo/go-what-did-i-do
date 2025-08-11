@@ -1,6 +1,4 @@
-/*
-Copyright © 2025 NAME HERE <EMAIL ADDRESS>
-*/
+// Package cmd contains all command line options
 package cmd
 
 import (
@@ -12,8 +10,9 @@ import (
 var customersCmd = &cobra.Command{
 	Use:   "customers",
 	Short: "Manage customers",
-	Run: func(cmd *cobra.Command, args []string) {
+	Run: func(cmd *cobra.Command, _ []string) {
 		services.CustomerStorage.Print()
+		_ = cmd.Help()
 	},
 }
 
