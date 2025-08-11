@@ -1,6 +1,4 @@
-/*
-Copyright © 2025 NAME HERE <EMAIL ADDRESS>
-*/
+// Package cmd contains all command line options
 package cmd
 
 import (
@@ -10,23 +8,27 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var customerId int64
+var customerID int64
 
 // customersDelCmd represents the customersDel command
 var customersDelCmd = &cobra.Command{
 	Use:   "delete",
 	Short: "Deletes a customer",
 
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("Deleting customer #", customerId)
-		services.CustomerStorage.Delete(customerId)
-		services.CustomerStorage.Save()
+	Run: func(_ *cobra.Command, _ []string) {
+		fmt.Println("Deleting customer #", customerID)
+		services.CustomerStorage.Delete(customerID)
+		err := services.CustomerStorage.Save()
+		if err != nil {
+			fmt.Println("Error saving customer after deleting customer:", err)
+		}
 	},
 }
 
 func init() {
-	customersDelCmd.Flags().Int64Var(&customerId, "id", -1, "ID of the customer to delete")
-	customersDelCmd.MarkFlagRequired("id")
+	customersDelCmd.Flags().Int64Var(&customerID, "id", -1, "ID of the customer to delete")
+	if err := customersDelCmd.MarkFlagRequired("id"); err != nil {
+		fmt.Println("Error marking flag as required:", err)
+	}
 	customersCmd.AddCommand(customersDelCmd)
-
 }
