@@ -1,3 +1,4 @@
+// Package dateutil provides utility functions for working with dates and times.
 package dateutil
 
 import (
@@ -5,6 +6,7 @@ import (
 	"time"
 )
 
+// FormatDate formats a time.Time as a string in the format "YYYY-MM-DD".
 func FormatDate(date *time.Time) string {
 	// Format the date as "YYYY-MM-DD"
 	if date == nil {
@@ -13,6 +15,7 @@ func FormatDate(date *time.Time) string {
 	return date.Format("2006-01-02")
 }
 
+// FormatTime formats a time.Time as a string in the format "YYYY-MM-DD HH:MM".
 func FormatTime(date *time.Time) string {
 	// Format the date as "YYYY-MM-DD"
 	if date == nil {
