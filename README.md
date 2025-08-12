@@ -19,17 +19,8 @@ erDiagram
     PROJECT {
         int id
         string name
-        int customer_id
-    }
-    TASK {
-        int id
-        string title
-        int project_id
-    }
-    WORK_EVENT {
-        int id
         string description
-        int task_id
+        int customer_id
     }
 
 ```
@@ -45,6 +36,7 @@ $HOME/.what-did-i-do
 | File    | Description |
 | -------- | ------- |
 | customers.json  |  customer-data in json-format    |
+| projects.json  |  project-data in json-format    |
 
 # Usage 
 
@@ -54,6 +46,7 @@ Help page is available for every command by:
 what-did-i-do --help 
 ```
 
+- [Customers](#customers)
 
 ## Customers 
 
@@ -97,20 +90,19 @@ what-did-i-do customers
 
 This comamnd handles projects under the customer. One customer could have non or many projects. 
 
-#### Add a project to customer
-
+### Add a project to customer
 
 ```bash
 what-did-i-do projects add --customerId 12345 --name "Acme Corporation"
 ```
 
-#### Delete a project
+### Delete a project
 
 ```bash
 what-did-i-do projects delete --id 12346
 ```
 
-#### List projects 
+### List projects 
 
 ```bash
 what-did-i-do projects 
