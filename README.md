@@ -1,4 +1,7 @@
 # go-what-did-i-do
+
+[![Build Application](https://github.com/joukojo/go-what-did-i-do/actions/workflows/build.yml/badge.svg?branch=develop)](https://github.com/joukojo/go-what-did-i-do/actions/workflows/build.yml)
+
 Simple command line tool for handling project tasks
 
 
