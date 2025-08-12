@@ -14,7 +14,15 @@ func initialize() {
 		panic(err)
 	}
 
-	services.CustomerStorage.Load()
+	err = services.CustomerStorage.Load()
+	if err != nil {
+		panic(err)
+	}
+
+	err = services.ProjectStorage.LoadProjects()
+	if err != nil {
+		panic(err)
+	}
 
 }
 

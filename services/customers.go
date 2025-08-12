@@ -40,6 +40,11 @@ func (c *Customers) Get(id int64) *Customer {
 	return nil
 }
 
+// Exists checks if a customer exists by ID.
+func (c *Customers) Exists(id int64) bool {
+	return c.Get(id) != nil
+}
+
 // Update customer name by id
 func (c *Customers) Update(id int64, name string) bool {
 	for i, customer := range *c {
@@ -93,23 +98,24 @@ func (c *Customers) Save() error {
 }
 
 // Load customers from a JSON file
-func (c *Customers) Load() {
+func (c *Customers) Load() error {
 	content, err := fileutil.GetDataFile(customerFileName)
 
 	if err != nil {
 		fmt.Println("Error loading customers:", err)
-		return
+		return err
 	}
 
 	customers := Customers{}
 	err = json.Unmarshal(content, &customers)
 	if err != nil {
 		fmt.Println("Error unmarshalling customers:", err)
-		return
+		return err
 	}
 
 	for _, customer := range customers {
 		CustomerStorage.Add(customer)
 	}
 
+	return nil
 }

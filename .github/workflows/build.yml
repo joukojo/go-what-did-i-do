@@ -40,4 +40,7 @@ jobs:
         run: |
           ./dist/what-did-i-do --version
           ./dist/what-did-i-do customers add --name "John Doe"
-          ./dist/what-did-i-do customers list
+          ./dist/what-did-i-do customers
+          ./dist/what-did-i-do projects add "Main task" "Main task description" 1754655717
+          ./dist/what-did-i-do projects
+          

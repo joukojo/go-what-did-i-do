@@ -1,6 +1,29 @@
 # go-what-did-i-do
+
+[![Build Application](https://github.com/joukojo/go-what-did-i-do/actions/workflows/build.yml/badge.svg?branch=develop)](https://github.com/joukojo/go-what-did-i-do/actions/workflows/build.yml)
+
 Simple command line tool for handling project tasks
 
+# Data relations 
+
+```mermaid
+erDiagram
+    CUSTOMER ||--o{ PROJECT : has
+    PROJECT ||--o{ TASK : contains
+    TASK ||--o{ WORK_EVENT : has
+
+    CUSTOMER {
+        int id
+        string name
+    }
+    PROJECT {
+        int id
+        string name
+        string description
+        int customer_id
+    }
+
+```
 
 # Data storage
 
@@ -13,6 +36,7 @@ $HOME/.what-did-i-do
 | File    | Description |
 | -------- | ------- |
 | customers.json  |  customer-data in json-format    |
+| projects.json  |  project-data in json-format    |
 
 # Usage 
 
@@ -22,6 +46,8 @@ Help page is available for every command by:
 what-did-i-do --help 
 ```
 
+- [Customers](#customers)
+- [Projects](#projects)
 
 ## Customers 
 
@@ -32,10 +58,10 @@ what-did-i-do customers [command] [flags]
 
 ### Available Commands
 
-| Command    | Description |
+| subcommand for customers    | Description |
 | -------- | ------- |
-| add  | Adds a new customer to the system    |
-| delete | Deletes an existing customer by ID     |
+| [add](#add-a-customer)  | Adds a new customer to the system    |
+| [delete](#delete-a-customer) | Deletes an existing customer by ID     |
 
 ### Flags
 
@@ -59,4 +85,31 @@ what-did-i-do customers delete --id 123445
 
 ```bash
 what-did-i-do customers 
+```
+
+## Projects 
+
+This comamnd handles projects under the customer. One customer could have non or many projects. 
+
+| Subcommand for projects   | Description |
+| -------- | ------- |
+| [add](#add-a-project-to-customer)  | Adds a new project for customer    |
+| [delete](#delete-a-project) | Deletes an existing project by ID     |
+
+### Add a project to customer
+
+```bash
+what-did-i-do projects add --customerId 12345 --name "Acme Corporation"
+```
+
+### Delete a project
+
+```bash
+what-did-i-do projects delete --id 12346
+```
+
+### List projects 
+
+```bash
+what-did-i-do projects 
 ```
