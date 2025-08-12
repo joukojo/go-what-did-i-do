@@ -10,7 +10,7 @@ import (
 
 // projectsAddCmd represents the projects add command
 var projectsAddCmd = &cobra.Command{
-	Use:   "add",
+	Use:   "add <name> <description> <customerID>",
 	Short: "Add a new project",
 	Run: func(cmd *cobra.Command, args []string) {
 		// Implementation for adding a new project
