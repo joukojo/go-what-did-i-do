@@ -41,3 +41,5 @@ jobs:
           ./dist/what-did-i-do --version
           ./dist/what-did-i-do customers add --name "John Doe"
           ./dist/what-did-i-do customers list
+          ./dist/what-did-i-do projects add --name "New Project" --description "Project Description"
+          ./dist/what-did-i-do projects list

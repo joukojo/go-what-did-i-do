@@ -60,3 +60,27 @@ what-did-i-do customers delete --id 123445
 ```bash
 what-did-i-do customers 
 ```
+
+
+## Projects 
+
+This comamnd handles projects under the customer. One customer could have non or many projects. 
+
+#### Add a project to customer
+
+
+```bash
+what-did-i-do projects add --customerId 12345 --name "Acme Corporation"
+```
+
+#### Delete a project
+
+```bash
+what-did-i-do projects delete --id 12346
+```
+
+#### List projects 
+
+```bash
+what-did-i-do projects 
+```
