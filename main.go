@@ -23,6 +23,7 @@ func initialize() {
 	if err != nil {
 		panic(err)
 	}
+	services.CustomerStorage.Load()
 
 }
 

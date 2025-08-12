@@ -61,7 +61,6 @@ what-did-i-do customers delete --id 123445
 what-did-i-do customers 
 ```
 
-
 ## Projects 
 
 This comamnd handles projects under the customer. One customer could have non or many projects. 

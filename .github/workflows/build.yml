@@ -43,3 +43,4 @@ jobs:
           ./dist/what-did-i-do customers list
           ./dist/what-did-i-do projects add --name "New Project" --description "Project Description"
           ./dist/what-did-i-do projects list
+          ./dist/what-did-i-do customers list
