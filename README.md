@@ -32,7 +32,7 @@ erDiagram
         int task_id
     }
 
-
+```
 
 # Data storage
 
