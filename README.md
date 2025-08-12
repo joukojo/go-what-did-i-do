@@ -4,6 +4,35 @@
 
 Simple command line tool for handling project tasks
 
+# Data relations 
+
+```mermaid
+erDiagram
+    CUSTOMER ||--o{ PROJECT : has
+    PROJECT ||--o{ TASK : contains
+    TASK ||--o{ WORK_EVENT : has
+
+    CUSTOMER {
+        int id
+        string name
+    }
+    PROJECT {
+        int id
+        string name
+        int customer_id
+    }
+    TASK {
+        int id
+        string title
+        int project_id
+    }
+    WORK_EVENT {
+        int id
+        string description
+        int task_id
+    }
+
+
 
 # Data storage
 
