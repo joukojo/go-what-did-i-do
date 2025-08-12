@@ -2,7 +2,6 @@
 package cmd
 
 import (
-	"github.com/joukojo/go-what-did-i-do/services"
 	"github.com/spf13/cobra"
 )
 
@@ -11,7 +10,6 @@ var customersCmd = &cobra.Command{
 	Use:   "customers",
 	Short: "Manage customers",
 	Run: func(cmd *cobra.Command, _ []string) {
-		services.CustomerStorage.Print()
 		_ = cmd.Help()
 	},
 }
