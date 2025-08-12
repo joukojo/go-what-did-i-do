@@ -107,7 +107,9 @@ func EnsureDir(path string) error {
 	} else if err != nil {
 		return fmt.Errorf("failed to check directory: %w", err)
 	} else {
-		fmt.Println("Directory already exists:", path)
+		if false {
+			fmt.Println("Directory already exists:", path)
+		}
 	}
 	return nil
 }
