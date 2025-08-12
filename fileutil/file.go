@@ -71,7 +71,11 @@ func GetDataFile(datafilename string) ([]byte, error) {
 	if os.IsNotExist(err) {
 		fmt.Println("Data file does not exist, creating:", dataFilePath)
 		array := []string{}
-		WriteFile(dataFilePath, array) // Create an empty file if it does not exist
+		err = WriteFile(dataFilePath, array) // Create an empty file if it does not exist
+
+		if err != nil {
+			panic(fmt.Sprintf("Failed to create data file: %s", err))
+		}
 	}
 
 	return ReadFile(dataFilePath)
