@@ -15,12 +15,13 @@ var customersDelCmd = &cobra.Command{
 	Use:   "delete",
 	Short: "Deletes a customer",
 
-	Run: func(_ *cobra.Command, _ []string) {
+	Run: func(cmd *cobra.Command, _ []string) {
 		fmt.Println("Deleting customer #", customerID)
 		services.CustomerStorage.Delete(customerID)
 		err := services.CustomerStorage.Save()
 		if err != nil {
-			fmt.Println("Error saving customer after deleting customer:", err)
+			cmd.PrintErrln("Error saving customer after deleting customer:", err)
+			return
 		}
 	},
 }
