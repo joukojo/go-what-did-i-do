@@ -28,7 +28,7 @@ var customersAddCmd = &cobra.Command{
 			customerName = promptutil.AskString("Name: ")
 		}
 		if customerName == "" {
-			fmt.Println("Error: Customer name cannot be empty.")
+			cmd.PrintErrln("Error: Customer name cannot be empty.")
 			_ = cmd.Help()
 			return
 		}
@@ -38,7 +38,7 @@ var customersAddCmd = &cobra.Command{
 		})
 		err := services.CustomerStorage.Save()
 		if err != nil {
-			fmt.Println("Error saving customer:", err)
+			cmd.PrintErrln("Error saving customer:", err)
 		}
 	},
 }
