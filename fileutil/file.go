@@ -66,6 +66,14 @@ func GetDataFile(datafilename string) ([]byte, error) {
 		return nil, err
 	}
 	dataFilePath := fmt.Sprintf("%s/%s/%s", homeDir, ".what-did-i-do", datafilename)
+
+	_, err = os.Stat(dataFilePath)
+	if os.IsNotExist(err) {
+		fmt.Println("Data file does not exist, creating:", dataFilePath)
+		array := []string{}
+		WriteFile(dataFilePath, array) // Create an empty file if it does not exist
+	}
+
 	return ReadFile(dataFilePath)
 }
 
@@ -91,6 +99,7 @@ func EnsureDir(path string) error {
 			return fmt.Errorf("failed to create directory: %w", err)
 		}
 		fmt.Println("Directory created:", path)
+
 	} else if err != nil {
 		return fmt.Errorf("failed to check directory: %w", err)
 	} else {
