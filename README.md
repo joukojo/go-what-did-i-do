@@ -47,6 +47,7 @@ what-did-i-do --help
 ```
 
 - [Customers](#customers)
+- [Projects](#projects)
 
 ## Customers 
 
@@ -57,10 +58,10 @@ what-did-i-do customers [command] [flags]
 
 ### Available Commands
 
-| Command    | Description |
+| subcommand for customers    | Description |
 | -------- | ------- |
-| add  | Adds a new customer to the system    |
-| delete | Deletes an existing customer by ID     |
+| [add](#add-a-customer)  | Adds a new customer to the system    |
+| [delete](#delete-a-customer) | Deletes an existing customer by ID     |
 
 ### Flags
 
@@ -89,6 +90,11 @@ what-did-i-do customers
 ## Projects 
 
 This comamnd handles projects under the customer. One customer could have non or many projects. 
+
+| Subcommand for projects   | Description |
+| -------- | ------- |
+| [add](#add-a-project-to-customer)  | Adds a new project for customer    |
+| [delete](#delete-a-project) | Deletes an existing project by ID     |
 
 ### Add a project to customer
 
