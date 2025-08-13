@@ -22,6 +22,12 @@ erDiagram
         string description
         int customer_id
     }
+    TASK {
+        int id
+        string name
+        string description
+        int project_id
+    }
 
 ```
 
@@ -37,6 +43,7 @@ $HOME/.what-did-i-do
 | -------- | ------- |
 | customers.json  |  customer-data in json-format    |
 | projects.json  |  project-data in json-format    |
+| tasks.json  |  task-data in json-format    |
 
 # Usage 
 
@@ -48,6 +55,7 @@ what-did-i-do --help
 
 - [Customers](#customers)
 - [Projects](#projects)
+- [Tasks](#tasks)
 
 ## Customers 
 
@@ -61,6 +69,7 @@ what-did-i-do customers [command] [flags]
 | subcommand for customers    | Description |
 | -------- | ------- |
 | [add](#add-a-customer)  | Adds a new customer to the system    |
+| [list](#list-customers) | List customers     |
 | [delete](#delete-a-customer) | Deletes an existing customer by ID     |
 
 ### Flags
@@ -84,7 +93,7 @@ what-did-i-do customers delete --id 123445
 #### List Customers 
 
 ```bash
-what-did-i-do customers 
+what-did-i-do customers list
 ```
 
 ## Projects 
@@ -94,6 +103,7 @@ This comamnd handles projects under the customer. One customer could have non or
 | Subcommand for projects   | Description |
 | -------- | ------- |
 | [add](#add-a-project-to-customer)  | Adds a new project for customer    |
+| [list](#list-projects)  | List projects    |
 | [delete](#delete-a-project) | Deletes an existing project by ID     |
 
 ### Add a project to customer
@@ -111,5 +121,33 @@ what-did-i-do projects delete --id 12346
 ### List projects 
 
 ```bash
-what-did-i-do projects 
+what-did-i-do projects list
+```
+
+## Tasks
+
+This comamnd handles tasks under the project. One project could have non or many tasks. 
+
+| Subcommand for projects   | Description |
+| -------- | ------- |
+| [add](#add-task-to-project)  | Adds a new task for project   |
+| [list](#list-tasks)  | List projects    |
+| [delete](#delete-task-from-project) | Deletes an existing task by ID     |
+
+### Add task to project 
+
+```bash
+what-did-i-do tasks add "Acme - customer service" "All Acme Inc tasks related to customer service" 4321
+```
+
+### List tasks 
+
+```bash
+what-did-i-do tasks list 
+```
+
+### Delete task from project
+
+```bash
+what-did-i-do tasks delete  <taskId> 
 ```

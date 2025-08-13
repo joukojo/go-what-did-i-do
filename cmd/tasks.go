@@ -5,16 +5,16 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// customersCmd represents the customers command
-var customersCmd = &cobra.Command{
-	Use:   "customers",
-	Short: "Manage customers",
+// tasksCmd represents the tasks command
+var tasksCmd = &cobra.Command{
+	Use:   "tasks",
+	Short: "Manage tasks",
 	Run: func(cmd *cobra.Command, _ []string) {
 		_ = cmd.Help()
 	},
 }
 
 func init() {
-	rootCmd.AddCommand(customersCmd)
+	rootCmd.AddCommand(tasksCmd)
 
 }

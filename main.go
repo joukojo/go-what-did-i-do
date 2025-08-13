@@ -24,6 +24,11 @@ func initialize() {
 		panic(err)
 	}
 
+	err = services.TaskStorage.LoadTasks()
+	if err != nil {
+		panic(err)
+	}
+
 }
 
 func main() {
