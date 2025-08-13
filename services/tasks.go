@@ -18,18 +18,18 @@ type Task struct {
 	ProjectID   int64  `json:"project_id"`
 }
 
-// Projects is an array of Project for JSON serialization and deserialization.
-// It is used to manage multiple projects in memory.
+// Tasks is an array of Task for JSON serialization and deserialization.
 type Tasks []Task
 
 // TaskStorage is an in-memory store for tasks.
 var TaskStorage = Tasks{}
 
+// Add task
 func (ts *Tasks) Add(task Task) {
 	*ts = append(*ts, task)
 }
 
-// Load tasks from a JSON file.
+// LoadTasks tasks from a JSON file.
 func (ts *Tasks) LoadTasks() error {
 	data, err := fileutil.GetDataFile("tasks.json")
 	if err != nil {
@@ -43,6 +43,7 @@ func (ts *Tasks) SaveTasks() error {
 	return fileutil.WriteDataFile("tasks.json", *ts)
 }
 
+// PrintTasks prints the tasks in a table format.
 func (ts *Tasks) PrintTasks() {
 
 	table := tablewriter.NewWriter(os.Stdout)
@@ -53,12 +54,16 @@ func (ts *Tasks) PrintTasks() {
 		if project := ProjectStorage.Get(task.ProjectID); project != nil {
 			projectName = project.Name
 		}
-		table.Append([]string{
+		err := table.Append([]string{
 			fmt.Sprintf("%d", task.ID),
 			projectName,
 			task.Name,
 			task.Description,
 		})
+		if err != nil {
+			fmt.Println("Error appending row to table:", err)
+			continue
+		}
 
 	}
 	err := table.Render() // Print the table to stdout
@@ -68,6 +73,7 @@ func (ts *Tasks) PrintTasks() {
 
 }
 
+// Exists checks if a task exists by its ID.
 func (ts *Tasks) Exists(taskID int64) bool {
 	for _, task := range *ts {
 		if task.ID == taskID {
