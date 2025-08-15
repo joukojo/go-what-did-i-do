@@ -29,6 +29,11 @@ func initialize() {
 		panic(err)
 	}
 
+	err = services.WorkStorage.LoadWorks()
+	if err != nil {
+		panic(err)
+	}
+
 }
 
 func main() {
