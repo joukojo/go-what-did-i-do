@@ -24,7 +24,7 @@ type Work struct {
 // Works is a collection of Work items.
 type Works []Work
 
-// WorksStorage is an in-memory storage for Work items.
+// WorkStorage is an in-memory storage for Work items.
 var WorkStorage = Works{}
 
 // Add work item to storage
@@ -42,6 +42,7 @@ func (ws *Works) GetByID(id int64) *Work {
 	return nil
 }
 
+// Exists checks if a work item exists by its ID.
 func (ws *Works) Exists(id int64) bool {
 	return ws.GetByID(id) != nil
 }
@@ -57,6 +58,8 @@ func (ws *Works) LoadWorks() error {
 	return json.Unmarshal(data, &WorkStorage)
 }
 
+// Print displays the works in a formatted table.
+// It uses the tablewriter package to create a visually appealing output.
 func (ws *Works) Print() {
 
 	table := tablewriter.NewTable(os.Stdout, tablewriter.WithConfig(tablewriter.Config{
@@ -90,7 +93,7 @@ func (ws *Works) Print() {
 				taskName = task.Name
 			}
 		}
-		table.Append([]string{
+		_ = table.Append([]string{
 			fmt.Sprintf("%d", work.ID),
 			taskName,
 			work.Description,
@@ -99,9 +102,46 @@ func (ws *Works) Print() {
 			duration,
 		})
 	}
-	table.Render()
+	_ = table.Render()
 }
 
+// SaveWorks saves the current works to a JSON file.
+// It overwrites the existing file or creates a new one if it doesn't exist.
 func (ws *Works) SaveWorks() error {
 	return fileutil.WriteDataFile("works.json", *ws)
+}
+
+// Stop a work item by its ID.
+// If a description is provided, it updates the work's description.
+func (ws *Works) Stop(id int64, description string) {
+	work := ws.GetByID(id)
+	if work == nil {
+		return
+	}
+
+	endDate := time.Now()
+	work.EndDate = &endDate
+	// If description is provided, update it
+	if description != "" {
+		work.Description = description
+	}
+
+	// Update the work in the storage
+	*ws = append(*ws, *work)
+}
+
+// Remove a work item by its ID.
+func (ws *Works) Remove(id int64) {
+	work := ws.GetByID(id)
+	if work == nil {
+		return
+	}
+
+	// Remove the work from the storage
+	for i, w := range *ws {
+		if w.ID == id {
+			*ws = append((*ws)[:i], (*ws)[i+1:]...)
+			break
+		}
+	}
 }
