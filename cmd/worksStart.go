@@ -10,9 +10,9 @@ import (
 )
 
 // worksCmd represents the works command
-var worksAddCmd = &cobra.Command{
-	Use:   "add",
-	Short: "Add new work <task id> <description>",
+var worksStartCmd = &cobra.Command{
+	Use:   "start",
+	Short: "Start new work <task id> <description>",
 	Run: func(cmd *cobra.Command, args []string) {
 		taskID, err := strconv.ParseInt(args[0], 10, 64)
 		if err != nil {
@@ -40,5 +40,5 @@ var worksAddCmd = &cobra.Command{
 }
 
 func init() {
-	worksCmd.AddCommand(worksAddCmd)
+	worksCmd.AddCommand(worksStartCmd)
 }
