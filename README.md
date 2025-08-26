@@ -56,6 +56,7 @@ what-did-i-do --help
 - [Customers](#customers)
 - [Projects](#projects)
 - [Tasks](#tasks)
+- [Works](#works)
 
 ## Customers 
 
@@ -128,7 +129,7 @@ what-did-i-do projects list
 
 This comamnd handles tasks under the project. One project could have non or many tasks. 
 
-| Subcommand for projects   | Description |
+| Subcommand for Tasks   | Description |
 | -------- | ------- |
 | [add](#add-task-to-project)  | Adds a new task for project   |
 | [list](#list-tasks)  | List projects    |
@@ -150,4 +151,42 @@ what-did-i-do tasks list
 
 ```bash
 what-did-i-do tasks delete  <taskId> 
+```
+
+## Works 
+
+| Subcommand for Works   | Description |
+| -------- | ------- |
+| [add](#add-work-to-task)  | Adds a new work for task   |
+| [start](#start-work)  | List projects    |
+| [stop](#stop-work)  | List projects    |
+| [list](#list-works) | List works     |
+| [delete](#delete-work) | Deletes work by id     |
+
+
+### Add work to task 
+
+```
+what-did-i-do works add <taskId> <description>
+```
+### Delete work 
+```
+what-did-i-do works delete <taskId>
+```
+### List works 
+
+```bash 
+what-did-i-do works list
+```
+
+### Start work  
+
+```bash 
+what-did-i-do works start <workId>
+```
+
+### Stop work  
+
+```bash 
+what-did-i-do works stop <workId>
 ```
