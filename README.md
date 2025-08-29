@@ -4,6 +4,8 @@
 
 Simple command line tool for handling project tasks
 
+![Logo](img/logo.png)
+
 # Data relations 
 
 ```mermaid
