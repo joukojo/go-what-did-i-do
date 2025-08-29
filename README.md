@@ -2,8 +2,6 @@
 
 [![Build Application](https://github.com/joukojo/go-what-did-i-do/actions/workflows/build.yml/badge.svg?branch=develop)](https://github.com/joukojo/go-what-did-i-do/actions/workflows/build.yml)
 
-![title](img/logo.png)
-
 Simple command line tool for handling project tasks
 
 # Data relations 
@@ -12,7 +10,7 @@ Simple command line tool for handling project tasks
 erDiagram
     CUSTOMER ||--o{ PROJECT : has
     PROJECT ||--o{ TASK : contains
-    TASK ||--o{ WORK : has
+    TASK ||--o{ WORK_EVENT : has
 
     CUSTOMER {
         int id
@@ -30,13 +28,6 @@ erDiagram
         string description
         int project_id
     }
-    WORK {
-        int id
-        string description
-        int task_id
-        start timestamp
-        end timestamp
-    }    
 
 ```
 
