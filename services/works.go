@@ -113,21 +113,28 @@ func (ws *Works) SaveWorks() error {
 
 // Stop a work item by its ID.
 // If a description is provided, it updates the work's description.
-func (ws *Works) Stop(id int64, description string) {
-	work := ws.GetByID(id)
-	if work == nil {
-		return
+// Returns an error if the work is not found or already stopped.
+func (ws *Works) Stop(id int64, description string) error {
+	for i := range *ws {
+		if (*ws)[i].ID == id {
+			// Check if already stopped
+			if (*ws)[i].EndDate != nil {
+				return fmt.Errorf("work %d is already stopped", id)
+			}
+			
+			// Update the existing work item in place
+			endDate := time.Now()
+			(*ws)[i].EndDate = &endDate
+			
+			// If description is provided, update it
+			if description != "" {
+				(*ws)[i].Description = description
+			}
+			
+			return nil
+		}
 	}
-
-	endDate := time.Now()
-	work.EndDate = &endDate
-	// If description is provided, update it
-	if description != "" {
-		work.Description = description
-	}
-
-	// Update the work in the storage
-	*ws = append(*ws, *work)
+	return fmt.Errorf("work %d not found", id)
 }
 
 // Remove a work item by its ID.
