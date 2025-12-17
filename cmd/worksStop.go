@@ -24,18 +24,25 @@ var worksStopCmd = &cobra.Command{
 			return
 		}
 
-		if len(args) > 1 {
-			description := args[1]
-			services.WorkStorage.Stop(workID, description)
-		} else {
-			services.WorkStorage.Stop(workID, "")
-		}
+	var stopErr error
+	if len(args) > 1 {
+		description := args[1]
+		stopErr = services.WorkStorage.Stop(workID, description)
+	} else {
+		stopErr = services.WorkStorage.Stop(workID, "")
+	}
 
-		_ = services.WorkStorage.SaveWorks()
+	if stopErr != nil {
+		cmd.PrintErrln("Error stopping work:", stopErr)
+		return
+	}
 
-	},
-}
+	err = services.WorkStorage.SaveWorks()
+	if err != nil {
+		cmd.PrintErrln("Error saving works:", err)
+		return
+	}
 
-func init() {
+	cmd.Println("Work", workID, "stopped successfully.")
 	worksCmd.AddCommand(worksStopCmd)
 }
