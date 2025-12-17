@@ -18,7 +18,6 @@ var worksStopCmd = &cobra.Command{
 			cmd.PrintErrln("Invalid WorkID, must be an integer")
 			return
 		}
-
 		if !services.WorkStorage.Exists(workID) {
 			cmd.PrintErrln("Work with ID", workID, "does not exist.")
 			return
@@ -37,12 +36,16 @@ var worksStopCmd = &cobra.Command{
 		return
 	}
 
-	err = services.WorkStorage.SaveWorks()
-	if err != nil {
-		cmd.PrintErrln("Error saving works:", err)
-		return
-	}
+		err = services.WorkStorage.SaveWorks()
+		if err != nil {
+			cmd.PrintErrln("Error saving works:", err)
+			return
+		}
 
-	cmd.Println("Work", workID, "stopped successfully.")
+		cmd.Println("Work", workID, "stopped successfully.")
+	},
+}
+
+func init() {
 	worksCmd.AddCommand(worksStopCmd)
 }
